@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvdt42dqwlwyl"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_kqt70"]
+[ext_resource type="PackedScene" uid="uid://bsg5jcghxqdp1" path="res://scenes/robot.tscn" id="2_kwdvp"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_kqt70")
+
+[node name="AddMoney" type="Button" parent="."]
+visible = false
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+tooltip_text = "If pressed, adds money"
+text = "ADD MONEY"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Robot" parent="." instance=ExtResource("2_kwdvp")]
+speed = 100.0
+friction = 1.0
+
+[node name="BuyClicker" type="Button" parent="."]
+offset_left = -100.0
+offset_top = 47.0
+offset_right = 100.0
+offset_bottom = 97.0
+pivot_offset = Vector2(100, 25)
+text = "BUY CLICKER"
+
+[node name="MachinesValues" type="VBoxContainer" parent="."]
+offset_left = 500.0
+offset_top = -300.0
+offset_right = 550.0
+offset_bottom = -200.0
+
+[node name="MoneySpeed" type="Label" parent="MachinesValues"]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="MachinesValues"]
+layout_mode = 2
+
+[node name="Clickers" type="Label" parent="MachinesValues"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MachinesKeys" type="VBoxContainer" parent="."]
+offset_left = 400.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = -200.0
+
+[node name="MoneySpeedKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "MONEY/S:"
+
+[node name="MoneyKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "MONEY:"
+
+[node name="ClickersKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "CLICKERS:"
+
+[node name="Counter" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="AddMoney" to="." method="_on_add_money_pressed"]
+[connection signal="mouse_entered" from="Robot" to="." method="_on_robot_mouse_entered"]
+[connection signal="pressed" from="BuyClicker" to="." method="_on_buy_clicker_pressed"]
+[connection signal="timeout" from="Counter" to="." method="_on_counter_timeout"]
