@@ -11,20 +11,31 @@ size = Vector2(8.93757, 24.8659)
 script = ExtResource("1_xpjcc")
 
 [node name="Foreground" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_lqcru")
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
 scale = Vector2(1.00876, 0.865291)
 texture = ExtResource("2_k56cs")
 
 [node name="Background" type="Sprite2D" parent="Background"]
-z_index = -1
 scale = Vector2(1.22831, 0.622836)
 texture = ExtResource("2_k56cs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(115, 4.54747e-12)
 rotation = 3.14159
 scale = Vector2(2.82372, -0.874483)
 shape = SubResource("RectangleShape2D_6ds5u")
+
+[node name="BlockCoolDown" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SK" type="Node2D" parent="SpawnPoints"]
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="BlockCoolDown" to="." method="_on_block_cool_down_timeout"]

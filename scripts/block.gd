@@ -13,10 +13,10 @@ var mouse_inside = false
 func _physics_process(delta):
 	if Input.is_action_just_pressed("left_click") and mouse_inside:
 		velocity.x = move_toward(velocity.x, 1 * speed + base_speed, acceleration)
-		print(velocity.x)
+		print(self, velocity.x)
 	else:
 		velocity.x = move_toward(velocity.x, base_speed, friction)
-		print(velocity.x)
+#		print(velocity.x)
 	move_and_slide()
 
 func _on_mouse_entered():
@@ -27,7 +27,3 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	print("Outside")
 	mouse_inside = false
-
-
-func _on_blockchain_body_entered(body):
-	queue_free()

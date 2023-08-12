@@ -10,6 +10,7 @@ var cur_clickers: int = 0
 
 @export var _block_price: float = 10.0
 @export var _clicker_price: float = 100.0
+@export var _kafka: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,4 +50,5 @@ func _on_counter_timeout():
 
 
 func _on_blockchain_body_entered(body):
-	cur_money += _block_price
+	if body is CharacterBody2D:
+		cur_money += _block_price

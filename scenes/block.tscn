@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsg5jcghxqdp1"]
+[gd_scene load_steps=3 format=3 uid="uid://bvv71dw5cn0qy"]
 
-[ext_resource type="Script" path="res://scripts/robot.gd" id="1_pdqtm"]
-[ext_resource type="Texture2D" uid="uid://c5fvqrkknwejj" path="res://art/block.png" id="2_baqti"]
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_ofdnc"]
+[ext_resource type="Texture2D" uid="uid://c5fvqrkknwejj" path="res://art/block.png" id="2_3o83r"]
 
-[node name="Robot" type="CharacterBody2D"]
+[node name="Block" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
 input_pickable = true
-script = ExtResource("1_pdqtm")
+script = ExtResource("1_ofdnc")
+speed = 100.0
+friction = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_baqti")
+texture = ExtResource("2_3o83r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-20, -120)
