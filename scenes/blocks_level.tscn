@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1in45mej56v4"]
+
+[ext_resource type="Script" path="res://scripts/BlocksLevel.gd" id="1_uug4r"]
+[ext_resource type="PackedScene" uid="uid://bsg5jcghxqdp1" path="res://scenes/robot.tscn" id="2_hpx3s"]
+[ext_resource type="PackedScene" uid="uid://dgsku8mu2q67v" path="res://scenes/api.tscn" id="3_mt0mh"]
+[ext_resource type="PackedScene" uid="uid://bxijjhum0jkxl" path="res://scenes/blockchain.tscn" id="4_cn78y"]
+
+[node name="BlocksLevel" type="Node"]
+script = ExtResource("1_uug4r")
+
+[node name="AddMoney" type="Button" parent="."]
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+tooltip_text = "If pressed, adds money"
+text = "ADD MONEY"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BuyClicker" type="Button" parent="."]
+offset_left = -100.0
+offset_top = 47.0
+offset_right = 100.0
+offset_bottom = 97.0
+pivot_offset = Vector2(100, 25)
+text = "BUY CLICKER"
+
+[node name="MachinesValues" type="VBoxContainer" parent="."]
+offset_left = 500.0
+offset_top = -300.0
+offset_right = 550.0
+offset_bottom = -200.0
+
+[node name="MoneySpeed" type="Label" parent="MachinesValues"]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="MachinesValues"]
+layout_mode = 2
+
+[node name="Clickers" type="Label" parent="MachinesValues"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MachinesKeys" type="VBoxContainer" parent="."]
+offset_left = 400.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = -200.0
+
+[node name="MoneySpeedKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "MONEY/S:"
+
+[node name="MoneyKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "MONEY:"
+
+[node name="ClickersKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "CLICKERS:"
+
+[node name="Counter" type="Timer" parent="."]
+autostart = true
+
+[node name="Block" parent="." instance=ExtResource("2_hpx3s")]
+z_index = -1
+position = Vector2(-558, 227)
+speed = 100.0
+friction = 1.0
+
+[node name="API" parent="." instance=ExtResource("3_mt0mh")]
+z_index = 1
+position = Vector2(-537, 228)
+scale = Vector2(0.75, 0.75)
+
+[node name="Blockchain" parent="." instance=ExtResource("4_cn78y")]
+
+[connection signal="pressed" from="AddMoney" to="." method="_on_add_money_pressed"]
+[connection signal="pressed" from="BuyClicker" to="." method="_on_buy_clicker_pressed"]
+[connection signal="timeout" from="Counter" to="." method="_on_counter_timeout"]
+[connection signal="body_entered" from="Blockchain" to="." method="_on_blockchain_body_entered"]
+[connection signal="body_entered" from="Blockchain" to="Block" method="_on_blockchain_body_entered"]

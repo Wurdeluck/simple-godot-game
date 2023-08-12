@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgsku8mu2q67v"]
+
+[ext_resource type="Texture2D" uid="uid://b3na8gog6diuu" path="res://art/api-code-icon.png" id="1_lqcru"]
+[ext_resource type="Script" path="res://scripts/api.gd" id="1_xpjcc"]
+[ext_resource type="Texture2D" uid="uid://b8t8uu20sbhl0" path="res://art/Grey_Square.svg.png" id="2_k56cs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ds5u"]
+size = Vector2(8.93757, 24.8659)
+
+[node name="API" type="Area2D"]
+script = ExtResource("1_xpjcc")
+
+[node name="Foreground" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_lqcru")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(1.00876, 0.865291)
+texture = ExtResource("2_k56cs")
+
+[node name="Background" type="Sprite2D" parent="Background"]
+z_index = -1
+scale = Vector2(1.22831, 0.622836)
+texture = ExtResource("2_k56cs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 3.14159
+scale = Vector2(2.82372, -0.874483)
+shape = SubResource("RectangleShape2D_6ds5u")
