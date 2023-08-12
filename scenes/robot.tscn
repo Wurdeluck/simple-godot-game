@@ -1,20 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsg5jcghxqdp1"]
+[gd_scene load_steps=3 format=3 uid="uid://bsg5jcghxqdp1"]
 
-[ext_resource type="Texture2D" uid="uid://dv23ony32axrp" path="res://icon.svg" id="1_l73v6"]
 [ext_resource type="Script" path="res://scripts/robot.gd" id="1_pdqtm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5trss"]
-size = Vector2(126, 126)
+[ext_resource type="Texture2D" uid="uid://c5fvqrkknwejj" path="res://art/block.png" id="2_baqti"]
 
 [node name="Robot" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 input_pickable = true
 script = ExtResource("1_pdqtm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_5trss")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_l73v6")
+texture = ExtResource("2_baqti")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-20, -120)
+polygon = PackedVector2Array(20, -136, 244, -8, 244, 248, 20, 376, -204, 248, -204, -8)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
