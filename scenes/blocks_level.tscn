@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bxijjhum0jkxl" path="res://scenes/blockchain.tscn" id="4_cn78y"]
 [ext_resource type="Script" path="res://scripts/kafka.gd" id="5_nr6vn"]
 
-[node name="BlocksLevel" type="Node" node_paths=PackedStringArray("_kafka")]
+[node name="BlocksLevel" type="Node" node_paths=PackedStringArray("_kafka", "block_timer")]
 script = ExtResource("1_uug4r")
 _kafka = NodePath("Kafka")
+block_timer = NodePath("Counter")
 
 [node name="AddMoney" type="Button" parent="."]
 visible = false
@@ -21,13 +22,19 @@ text = "ADD MONEY"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="BuyClicker" type="Button" parent="."]
-offset_left = -100.0
-offset_top = 47.0
-offset_right = 100.0
-offset_bottom = 97.0
+[node name="ClientPrice" type="Label" parent="."]
+offset_left = 83.0
+offset_top = -242.0
+offset_right = 276.0
+offset_bottom = -216.0
+
+[node name="BuyClient" type="Button" parent="."]
+offset_left = 82.0
+offset_top = -202.0
+offset_right = 282.0
+offset_bottom = -152.0
 pivot_offset = Vector2(100, 25)
-text = "BUY CLICKER"
+text = "BUY CLIENT"
 
 [node name="MachinesValues" type="VBoxContainer" parent="."]
 offset_left = 500.0
@@ -41,7 +48,7 @@ layout_mode = 2
 [node name="Money" type="Label" parent="MachinesValues"]
 layout_mode = 2
 
-[node name="Clickers" type="Label" parent="MachinesValues"]
+[node name="Clients" type="Label" parent="MachinesValues"]
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
@@ -59,9 +66,9 @@ text = "MONEY/S:"
 layout_mode = 2
 text = "MONEY:"
 
-[node name="ClickersKey" type="Label" parent="MachinesKeys"]
+[node name="ClientsKey" type="Label" parent="MachinesKeys"]
 layout_mode = 2
-text = "CLICKERS:"
+text = "CLIENTS:"
 
 [node name="Counter" type="Timer" parent="."]
 autostart = true
@@ -87,7 +94,7 @@ _kafka = NodePath("../Kafka")
 script = ExtResource("5_nr6vn")
 
 [connection signal="pressed" from="AddMoney" to="." method="_on_add_money_pressed"]
-[connection signal="pressed" from="BuyClicker" to="." method="_on_buy_clicker_pressed"]
+[connection signal="pressed" from="BuyClient" to="." method="_on_buy_client_pressed"]
 [connection signal="timeout" from="Counter" to="." method="_on_counter_timeout"]
 [connection signal="body_exited" from="API" to="Kafka" method="_on_api_body_exited"]
 [connection signal="body_entered" from="Blockchain" to="." method="_on_blockchain_body_entered"]

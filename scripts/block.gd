@@ -17,7 +17,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, base_speed, friction)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		print(collision_info)
+		print(collision_info.get_collider().velocity)
 		velocity = velocity.bounce(collision_info.get_normal())
 
 func _on_mouse_entered():

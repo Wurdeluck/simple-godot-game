@@ -1,5 +1,7 @@
 extends Area2D
 
+@onready var global_vars = get_node("/root/GlobalVariables")
+
 var _is_blocks_inside = false
 
 @export var _block: PackedScene
@@ -22,6 +24,7 @@ func _on_block_cool_down_timeout():
 						print("Block spawn is not Node2D!")
 		var rand_spawn_point: Node2D = spawns[randi() % spawns.size()]
 		var new_block = _block.instantiate() as CharacterBody2D
+		new_block.base_speed += global_vars.cur_clients
 		_kafka.add_child(new_block)
 		print("New ", new_block ," spawned in ", rand_spawn_point.name)
 		

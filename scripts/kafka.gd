@@ -23,3 +23,4 @@ func _on_api_body_exited(body):
 func _on_blockchain_body_entered(body):
 		print(body, " removed from messageBus")
 		_blocks.erase(body)
+		_blocks.pop_front()
