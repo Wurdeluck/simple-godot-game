@@ -13,11 +13,12 @@ var mouse_inside = false
 func _physics_process(delta):
 	if Input.is_action_just_pressed("left_click") and mouse_inside:
 		velocity.x = move_toward(velocity.x, 1 * speed + base_speed, acceleration)
-		print(self, velocity.x)
 	else:
 		velocity.x = move_toward(velocity.x, base_speed, friction)
-#		print(velocity.x)
-	move_and_slide()
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		print(collision_info)
+		velocity = velocity.bounce(collision_info.get_normal())
 
 func _on_mouse_entered():
 	print("Inside")

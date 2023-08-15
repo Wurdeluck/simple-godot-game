@@ -74,7 +74,7 @@ speed = 50.0
 
 [node name="API" parent="." node_paths=PackedStringArray("_kafka") instance=ExtResource("3_mt0mh")]
 z_index = 1
-position = Vector2(-537, 228)
+position = Vector2(-537, 220)
 scale = Vector2(0.75, 0.75)
 _block = ExtResource("2_hpx3s")
 _kafka = NodePath("../Kafka")

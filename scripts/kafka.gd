@@ -2,11 +2,11 @@ extends Node2D
 
 @onready var _blocks: Array = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var from = Vector2(0,0)
-	var to = Vector2(100,100)
-	draw_line(from, to , Color(0, 0, 1), 5)
+var from = Vector2(-537,220)
+var to = Vector2(549,220)
+
+func _draw():
+	draw_line(from, to , Color(0.3, 0, 0.7), 5)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -4,17 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://c5fvqrkknwejj" path="res://art/block.png" id="2_3o83r"]
 
 [node name="Block" type="CharacterBody2D"]
-scale = Vector2(0.25, 0.25)
 input_pickable = true
 script = ExtResource("1_ofdnc")
 speed = 100.0
 friction = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_3o83r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-20, -120)
+position = Vector2(-5, -30)
+scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(20, -136, 244, -8, 244, 248, 20, 376, -204, 248, -204, -8)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
