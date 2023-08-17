@@ -137,7 +137,6 @@ shape = SubResource("SegmentShape2D_xvdt7")
 [connection signal="pressed" from="AddMoney" to="." method="_on_add_money_pressed"]
 [connection signal="pressed" from="BuyClient" to="." method="_on_buy_client_pressed"]
 [connection signal="timeout" from="Counter" to="." method="_on_counter_timeout"]
-[connection signal="body_entered" from="API" to="API" method="_on_body_entered"]
 [connection signal="body_exited" from="API" to="Kafka" method="_on_api_body_exited"]
 [connection signal="body_entered" from="Blockchain" to="." method="_on_blockchain_body_entered"]
 [connection signal="body_entered" from="Blockchain" to="Blockchain" method="_on_body_entered"]

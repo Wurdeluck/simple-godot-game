@@ -46,10 +46,3 @@ func _on_body_exited(body):
 		return
 	print(body, " left from API")
 	_is_blocks_inside = false
-
-
-#func _on_body_entered(body):
-#	var new_block := body as Block
-#	if not new_block:
-#		return
-#	_is_blocks_inside = true
