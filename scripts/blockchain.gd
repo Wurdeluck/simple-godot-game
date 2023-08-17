@@ -13,8 +13,11 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body is CharacterBody2D:
-		print(body, " successfully entered blockchain, deleting")
-		for ch_i in _kafka.get_children():
-			if ch_i == body:
-				ch_i.queue_free()
+	var new_block := body as Block
+	if not new_block:
+		return
+	print(new_block, " successfully entered blockchain, deleting")
+	for block in _kafka.blocks:
+		if block == new_block:
+			print("Removing", block, " because it equals to", new_block)
+			block.queue_free()
