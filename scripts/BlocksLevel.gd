@@ -24,7 +24,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	cur_money_label.text = str("%10.2f" % cur_money)
 	cur_money_speed_label.text = str("%10.2f" % cur_money_speed)
 	cur_clients_label.text = str(cur_clients)
@@ -37,11 +37,10 @@ func _on_add_money_pressed():
 
 
 func _on_buy_client_pressed():
-	print(cur_money, " >= ", cur_client_price)
-	if (cur_money >= cur_client_price):
+	if (cur_money >= cur_client_price or int(cur_money) >= int(cur_client_price)):
 		cur_money -= cur_client_price
 		cur_clients += 1
-		cur_money_speed = float(1.1 ** cur_clients)/100
+		cur_money_speed = float(1.1 ** cur_clients)*cur_clients/100
 		cur_client_price *= 2.5
 		var wait_time: float = _api.block_cooldown_timer_base_time/float(cur_clients)
 		print("Expected wait time ", wait_time)
@@ -50,9 +49,8 @@ func _on_buy_client_pressed():
 
 func _on_counter_timeout():
 	if (cur_clients > 0):
-		for i in range(cur_clients):
-			cur_money += cur_money_speed
-			cur_money_label.text = str("%10.2f" % cur_money)
+		cur_money += cur_money_speed
+		cur_money_label.text = str("%10.2f" % cur_money)
 	in_game_time += 1
 	if (in_game_time < 60):
 		game_time_label.text = str("GAME TIME: ", in_game_time, " s.")
