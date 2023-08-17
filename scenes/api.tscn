@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b8t8uu20sbhl0" path="res://art/Grey_Square.svg.png" id="2_k56cs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ds5u"]
-size = Vector2(8.93757, 24.8659)
+size = Vector2(90.5255, 24.8659)
 
 [node name="API" type="Area2D"]
 script = ExtResource("1_xpjcc")
@@ -24,7 +24,7 @@ scale = Vector2(1.22831, 0.622836)
 texture = ExtResource("2_k56cs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(115, 4.54747e-12)
+position = Vector2(-0.190712, 0.000292029)
 rotation = 3.14159
 scale = Vector2(2.82372, -0.874483)
 shape = SubResource("RectangleShape2D_6ds5u")

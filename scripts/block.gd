@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Block
 
 @export var speed = 30.0
 @export var base_speed = 10.0
@@ -17,7 +18,8 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, base_speed, friction)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		print(collision_info)
+		if collision_info.get_collider() is CharacterBody2D:
+			print(collision_info.get_collider().velocity)
 		velocity = velocity.bounce(collision_info.get_normal())
 
 func _on_mouse_entered():
