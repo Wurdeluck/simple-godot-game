@@ -1,17 +1,13 @@
 extends Node2D
+class_name Kafka
 
 @onready var blocks: Array[Block] = []
 
-var from = Vector2(-537,220)
-var to = Vector2(549,220)
+var from = Vector2(-800,0)
+var to = Vector2(800, 0)
 
 func _draw():
 	draw_line(from, to , Color(0.3, 0, 0.7), 5)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func _on_api_body_exited(body):
@@ -31,3 +27,10 @@ func _on_blockchain_body_entered(body):
 	blocks.erase(new_block)
 	print(new_block, " removed from messageBus")
 	print("Removed ", new_block," now it's ", blocks)
+
+
+func _on_block_stuck_timer_timeout():
+	var block: Block = blocks.pick_random()
+	if block:
+		print("Try stuck from Kafka! ", block, block.position)
+		block.try_stuck()

@@ -1,15 +1,8 @@
 extends Area2D
+class_name Blockchain
 
 @export var _kafka: Node2D
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+@onready var blocks_in_blockchain: int = 0
 
 
 func _on_body_entered(body):
@@ -20,4 +13,5 @@ func _on_body_entered(body):
 	for block in _kafka.blocks:
 		if block == new_block:
 			print("Removing", block, " because it equals to", new_block)
+			blocks_in_blockchain += 1
 			block.queue_free()

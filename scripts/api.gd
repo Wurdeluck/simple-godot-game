@@ -1,16 +1,15 @@
 extends Area2D
+class_name API
 
 var _is_blocks_inside = false
 
 @export var _block: PackedScene
-@export var _kafka: Node2D
+@export var _kafka: Kafka
 @onready var block_cooldown_timer: Timer = $BlockCoolDown
 @onready var block_cooldown_timer_base_time = block_cooldown_timer.wait_time
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	if self.get_overlapping_bodies():
 		_is_blocks_inside = true
 	else:
@@ -29,12 +28,12 @@ func _on_block_cool_down_timeout():
 						print("Block spawn is not Node2D!")
 		var rand_spawn_point: Node2D = spawns[randi() % spawns.size()]
 		var new_block := _block.instantiate() as Block
+		_kafka.add_child(new_block)
+		new_block.owner = _kafka
 		new_block.base_speed *= owner.cur_clients
 		new_block.z_index = 2
-		_kafka.add_child(new_block)
-		print("New ", new_block ," spawned in ", rand_spawn_point.name)
-		
 		new_block.global_position = rand_spawn_point.global_position
+		print("New ", new_block ," with pos:", new_block.global_position," spawned in ", rand_spawn_point.name, " with pos:", new_block.global_position)
 		_is_blocks_inside = true
 	else:
 		print("No Block spawn!")

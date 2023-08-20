@@ -1,10 +1,15 @@
 extends Node
 
+const FLOAT_EPSILON = 0.009
+
 @onready var cur_money_label: Label = $MachinesValues/Money
 @onready var cur_money_speed_label: Label = $MachinesValues/MoneySpeed
 @onready var cur_clients_label: Label = $MachinesValues/Clients
+@onready var cur_blocks_label: Label = $MachinesKeys/BlocksKey
 @onready var blocks_in_kafka_label: Label = $BlocksInKafka
 @onready var game_time_label: Label = $GameTime
+@onready var rich_money_label: RichTextLabel = $RichMoneyLabel
+var rich_money: float = 0.0
 var cur_money: float = 0.0
 var cur_money_speed: float = 0.0
 var cur_clients: int = 1
@@ -14,8 +19,9 @@ var in_game_time: int = 0
 @onready var cur_client_price_label: Label = $ClientPrice
 @onready var buy_client_button: Button = $BuyClient
 
-@onready var _kafka: Node2D = $Kafka
-@onready var _api: Area2D = $API
+@export var _kafka: Kafka
+@export var _api: API
+@export var _blockchain: Blockchain
 @onready var block_timer: Timer
 
 # Called when the node enters the scene tree for the first time.
@@ -25,6 +31,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	cur_blocks_label.text = str("BLOCKS: %15d" % _blockchain.blocks_in_blockchain)
 	cur_money_label.text = str("%10.2f" % cur_money)
 	cur_money_speed_label.text = str("%10.2f" % cur_money_speed)
 	cur_clients_label.text = str(cur_clients)
@@ -32,15 +39,19 @@ func _process(_delta):
 	blocks_in_kafka_label.text = str("BLOCKS IN KAFKA: %10.2f" % _kafka.blocks.size())
 
 
+func _physics_process(_delta):
+	rich_money += 1.001
+	rich_money_label.text = str(rich_money)
+
 func _on_add_money_pressed():
 	cur_money += block_price
 
 
 func _on_buy_client_pressed():
-	if (cur_money >= cur_client_price or int(cur_money) >= int(cur_client_price)):
+	if (cur_money >= cur_client_price or self.compare_floats(cur_money, cur_client_price)):
 		cur_money -= cur_client_price
 		cur_clients += 1
-		cur_money_speed = float(1.1 ** cur_clients)*cur_clients/100
+		cur_money_speed = float(1.1 ** cur_clients)*cur_clients/80
 		cur_client_price *= 2.5
 		var wait_time: float = _api.block_cooldown_timer_base_time/float(cur_clients)
 		print("Expected wait time ", wait_time)
@@ -65,3 +76,6 @@ func _on_blockchain_body_entered(body):
 		return
 	cur_money += block_price
 
+
+static func compare_floats(a, b, epsilon = FLOAT_EPSILON):
+	return abs(a - b) <= epsilon
