@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6d0wsmuvjdg4"]
+
+[ext_resource type="Script" path="res://scripts/kafka.gd" id="1_m1al8"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q56v7"]
+a = Vector2(-960, 0)
+b = Vector2(960, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xvdt7"]
+a = Vector2(-960, 0)
+b = Vector2(960, 0)
+
+[node name="Kafka" type="Node2D"]
+position = Vector2(0, -50)
+script = ExtResource("1_m1al8")
+
+[node name="BlockStuckTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="UpperKafkaBound" type="StaticBody2D" parent="."]
+position = Vector2(0, -75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperKafkaBound"]
+modulate = Color(1, 0.0901961, 1, 1)
+shape = SubResource("SegmentShape2D_q56v7")
+
+[node name="LowerKafkaBound" type="StaticBody2D" parent="."]
+position = Vector2(0, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerKafkaBound"]
+modulate = Color(1, 0.0901961, 1, 1)
+shape = SubResource("SegmentShape2D_xvdt7")
+
+[connection signal="timeout" from="BlockStuckTimer" to="." method="_on_block_stuck_timer_timeout"]
