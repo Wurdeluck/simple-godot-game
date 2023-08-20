@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxijjhum0jkxl"]
+[gd_scene load_steps=4 format=3 uid="uid://bxijjhum0jkxl"]
 
 [ext_resource type="Texture2D" uid="uid://cs1v6l08ifk4y" path="res://art/blockchain.png" id="1_5j4o3"]
 [ext_resource type="Script" path="res://scripts/blockchain.gd" id="1_5xobn"]
-[ext_resource type="Texture2D" uid="uid://b8t8uu20sbhl0" path="res://art/Grey_Square.svg.png" id="2_sijpo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rr1wg"]
 size = Vector2(60, 50)
@@ -12,14 +11,13 @@ position = Vector2(549, 220)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_5xobn")
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.493545, 0.493546, 0.493545, 1)
+polygon = PackedVector2Array(142.5, -62.5, 187.5, -75, 187.5, -185, 77.5, -190, 65, -167.5, -12.5, -160, -15, -142.5, -65, -142.5, -72.5, -187.5, -185, -187.5, -187.5, -75, -167.5, -65, -167.5, 5, -142.5, 10, -142.5, 72.5, -187.5, 77.5, -185, 190, -75, 192.5, -65, 167.5, 2.5, 167.5, 10, 142.5, 67.5, 142.5, 72.5, 192.5, 187.5, 190, 187.5, 80, 167.5, 70, 165, -5, 142.5, -10)
+
 [node name="Foreground" type="Sprite2D" parent="."]
 z_index = 1
 texture = ExtResource("1_5j4o3")
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(2.5, 2.5)
-scale = Vector2(1.935, 1.954)
-texture = ExtResource("2_sijpo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(128, 0)

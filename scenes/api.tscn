@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgsku8mu2q67v"]
+[gd_scene load_steps=4 format=3 uid="uid://dgsku8mu2q67v"]
 
 [ext_resource type="Texture2D" uid="uid://b3na8gog6diuu" path="res://art/api-code-icon.png" id="1_lqcru"]
 [ext_resource type="Script" path="res://scripts/api.gd" id="1_xpjcc"]
-[ext_resource type="Texture2D" uid="uid://b8t8uu20sbhl0" path="res://art/Grey_Square.svg.png" id="2_k56cs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ds5u"]
-size = Vector2(90.5255, 24.8659)
+size = Vector2(112.128, 24.8659)
 
 [node name="API" type="Area2D"]
 script = ExtResource("1_xpjcc")
@@ -15,16 +14,13 @@ z_index = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_lqcru")
 
-[node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(1.00876, 0.865291)
-texture = ExtResource("2_k56cs")
-
-[node name="Background" type="Sprite2D" parent="Background"]
-scale = Vector2(1.22831, 0.622836)
-texture = ExtResource("2_k56cs")
+[node name="Background" type="Polygon2D" parent="."]
+position = Vector2(120, 47)
+color = Color(0.494118, 0.494118, 0.494118, 1)
+polygon = PackedVector2Array(0, -99, -27, -99, -27, -135, -207, -135, -207, -98, -240, -98, -240, 5, -210, 5, -211, 42, -27, 42, -27, 3, 0, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.190712, 0.000292029)
+position = Vector2(-30.6907, 0.000369352)
 rotation = 3.14159
 scale = Vector2(2.82372, -0.874483)
 shape = SubResource("RectangleShape2D_6ds5u")

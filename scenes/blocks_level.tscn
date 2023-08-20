@@ -1,40 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1in45mej56v4"]
+[gd_scene load_steps=7 format=3 uid="uid://c1in45mej56v4"]
 
 [ext_resource type="Script" path="res://scripts/BlocksLevel.gd" id="1_uug4r"]
 [ext_resource type="PackedScene" uid="uid://bvv71dw5cn0qy" path="res://scenes/block.tscn" id="2_hpx3s"]
 [ext_resource type="PackedScene" uid="uid://dgsku8mu2q67v" path="res://scenes/api.tscn" id="3_mt0mh"]
 [ext_resource type="PackedScene" uid="uid://bxijjhum0jkxl" path="res://scenes/blockchain.tscn" id="4_cn78y"]
-[ext_resource type="Script" path="res://scripts/kafka.gd" id="5_nr6vn"]
+[ext_resource type="PackedScene" uid="uid://b6d0wsmuvjdg4" path="res://scenes/kafka.tscn" id="5_5cbj5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_8huyt"]
 a = Vector2(0, -30)
 b = Vector2(0, 30)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_q56v7"]
-a = Vector2(-640, 0)
-b = Vector2(640, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_xvdt7"]
-a = Vector2(-640, 0)
-b = Vector2(640, 0)
-
-[node name="BlocksLevel" type="Node"]
+[node name="BlocksLevel" type="Node" node_paths=PackedStringArray("_kafka", "_api", "_blockchain")]
 script = ExtResource("1_uug4r")
+_kafka = NodePath("Kafka")
+_api = NodePath("API")
+_blockchain = NodePath("Blockchain")
 
 [node name="AddMoney" type="Button" parent="."]
 visible = false
-offset_left = -100.0
-offset_top = -25.0
-offset_right = 100.0
-offset_bottom = 25.0
+offset_left = -101.0
+offset_top = -296.0
+offset_right = 99.0
+offset_bottom = -246.0
 tooltip_text = "If pressed, adds money"
 text = "ADD MONEY"
 
+[node name="RichMoneyLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -87.0
+offset_top = -350.0
+offset_right = 79.0
+offset_bottom = -306.0
+text = "Random float timer"
+fit_content = true
+
 [node name="GameTime" type="Label" parent="."]
-offset_left = -617.0
-offset_top = -344.0
-offset_right = -577.0
-offset_bottom = -321.0
+offset_left = -938.0
+offset_top = -523.0
+offset_right = -797.0
+offset_bottom = -474.0
+text = "GAME TIME: 0 s."
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -45,40 +50,44 @@ offset_right = 500.0
 offset_bottom = -187.0
 
 [node name="ClientPrice" type="Label" parent="."]
-offset_left = 83.0
-offset_top = -242.0
-offset_right = 276.0
-offset_bottom = -216.0
+offset_left = 438.0
+offset_top = -429.0
+offset_right = 631.0
+offset_bottom = -403.0
+text = "CLIENT PRICE: 0"
 
 [node name="BuyClient" type="Button" parent="."]
-offset_left = 82.0
-offset_top = -202.0
-offset_right = 282.0
-offset_bottom = -152.0
+offset_left = 437.0
+offset_top = -389.0
+offset_right = 637.0
+offset_bottom = -339.0
 pivot_offset = Vector2(100, 25)
 text = "BUY CLIENT"
 
 [node name="MachinesValues" type="VBoxContainer" parent="."]
-offset_left = 500.0
-offset_top = -300.0
-offset_right = 550.0
-offset_bottom = -200.0
+offset_left = 855.0
+offset_top = -487.0
+offset_right = 905.0
+offset_bottom = -387.0
 
 [node name="MoneySpeed" type="Label" parent="MachinesValues"]
 layout_mode = 2
+text = "0"
 
 [node name="Money" type="Label" parent="MachinesValues"]
 layout_mode = 2
+text = "0"
 
 [node name="Clients" type="Label" parent="MachinesValues"]
 layout_mode = 2
+text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="MachinesKeys" type="VBoxContainer" parent="."]
-offset_left = 400.0
-offset_top = -300.0
-offset_right = 500.0
-offset_bottom = -200.0
+offset_left = 755.0
+offset_top = -487.0
+offset_right = 855.0
+offset_bottom = -387.0
 
 [node name="MoneySpeedKey" type="Label" parent="MachinesKeys"]
 layout_mode = 2
@@ -92,47 +101,39 @@ text = "MONEY:"
 layout_mode = 2
 text = "CLIENTS:"
 
+[node name="BlocksKey" type="Label" parent="MachinesKeys"]
+layout_mode = 2
+text = "BLOCKS:        0"
+
 [node name="Counter" type="Timer" parent="."]
 autostart = true
 
 [node name="Block" parent="." instance=ExtResource("2_hpx3s")]
+visible = false
 z_index = -1
-position = Vector2(-537, -80)
-speed = 50.0
+position = Vector2(-539, -233)
 
 [node name="API" parent="." node_paths=PackedStringArray("_kafka") instance=ExtResource("3_mt0mh")]
 z_index = 1
-position = Vector2(-537, 220)
+position = Vector2(-860, 150)
 scale = Vector2(0.75, 0.75)
 _block = ExtResource("2_hpx3s")
 _kafka = NodePath("../Kafka")
 
 [node name="Blockchain" parent="." node_paths=PackedStringArray("_kafka") instance=ExtResource("4_cn78y")]
 z_index = 1
+position = Vector2(860, 150)
 _kafka = NodePath("../Kafka")
 
-[node name="Kafka" type="Node2D" parent="."]
-script = ExtResource("5_nr6vn")
+[node name="Kafka" parent="." instance=ExtResource("5_5cbj5")]
+position = Vector2(0, 150)
 
 [node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(-265, -80)
+visible = false
+position = Vector2(-357, -239)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 shape = SubResource("SegmentShape2D_8huyt")
-
-[node name="UpperKafkaBound" type="StaticBody2D" parent="."]
-position = Vector2(0, 150)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperKafkaBound"]
-modulate = Color(1, 0.0901961, 1, 1)
-shape = SubResource("SegmentShape2D_q56v7")
-
-[node name="LowerKafkaBound" type="StaticBody2D" parent="."]
-position = Vector2(0, 300)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerKafkaBound"]
-modulate = Color(1, 0.0901961, 1, 1)
-shape = SubResource("SegmentShape2D_xvdt7")
 
 [connection signal="pressed" from="AddMoney" to="." method="_on_add_money_pressed"]
 [connection signal="pressed" from="BuyClient" to="." method="_on_buy_client_pressed"]
