@@ -39,8 +39,8 @@ func _process(_delta):
 	blocks_in_kafka_label.text = str("BLOCKS IN KAFKA: %10.2f" % _kafka.blocks.size())
 
 
-func _physics_process(_delta):
-	rich_money += 1.001
+func _physics_process(delta):
+	rich_money += 1.001 * delta
 	rich_money_label.text = str(rich_money)
 
 func _on_add_money_pressed():
